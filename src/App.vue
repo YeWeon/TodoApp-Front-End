@@ -5,7 +5,7 @@
     <TodoList :props-data="todoItems" @remove:todo="removeTodo"
       @toggle:todo="toggleTodo">
     </TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
 
@@ -57,9 +57,13 @@ export default defineComponent({
       localStorage.removeItem(item);
       localStorage.setItem(item,JSON.stringify(todoItems[index]));
     };
+    
+    const clearTodo = () => {
+      localStorage.clear()
+      todoItems.splice(0)
+    }
 
-
-    return { todoItems, addTodo, removeTodo, toggleTodo };
+    return { todoItems, addTodo, removeTodo, toggleTodo, clearTodo };
   }, //setup
 
 });

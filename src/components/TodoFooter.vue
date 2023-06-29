@@ -10,7 +10,7 @@ import { useStore } from "vuex"
 
 export default defineComponent({
     emits: ['clear:todo'],
-    setup(props, { emit }) {
+    setup() {
         const store = useStore()
 
         const clearTodo = () => {

@@ -16,7 +16,7 @@
               </slot>
             </div>
   
-            <div class="modal-footer">
+            <div class="modal-footer footer">
               <slot name="footer">
                 <!-- default footer -->
                 <button class="modal-default-button" @click="$emit('close')">
@@ -91,7 +91,7 @@
     transform: scale(1.1);
   }
 
-  ::v-deep .modal-footer {
-    line-height: 170% !important;
+  .footer {
+    line-height: 200% !important;
   }
   </style>

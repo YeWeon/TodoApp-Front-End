@@ -1,32 +1,31 @@
 <template>
     <div>
         <TransitionGroup name="list" tag="ul">
-            <li v-for="(todoItem, idx) in props.propsData" :key="idx" class="shadow">
-                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
-                @click="toggleComplete(todoItem, idx)"></i>
+            <li v-for="(todoItem, idx) in todoItems" :key="idx" class="shadow">
+                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }"
+                    @click="toggleComplete(todoItem, idx)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
-                <span class="removeBtn" @click="removeTodo(todoItem.item, idx)">
+                <span class="removeBtn" @click="removeTodo(todoItem, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
+
             </li>
         </TransitionGroup>
-
     </div>
 </template>
 
 <script setup lang="ts">
 import TodoItem from '@/types/TodoItem';
-import { PropType, ref } from 'vue'
+import { computed } from 'vue'
+import { useStore } from "vuex"
 
-const props = defineProps({
-    propsData: { type: Array as PropType<TodoItem[]>, 
-                 required: true }
-})
+const store = useStore()
+const todoItems = computed(() => store.state.todoItems)
 
-const emit = defineEmits(["remove:todo","toggle:todo"])
+const emit = defineEmits(["remove:todo", "toggle:todo"])
 
-const removeTodo = (todoItemStr: string, index: number) => {
-    emit('remove:todo', todoItemStr, index)    
+const removeTodo = (todoItem: TodoItem, index: number) => {
+    store.commit("removeTodo", {todoItem, index})
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {

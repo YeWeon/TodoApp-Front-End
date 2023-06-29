@@ -1,5 +1,5 @@
 <template>
-    <div class="clearAllContainer">
+    <div>
         <span class="clearAllBtn" @click="clearTodo">Clear All</span>
     </div>
 </template>

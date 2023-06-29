@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, idx) in props.propsData" :key="idx">
+            <li v-for="(todoItem, idx) in props.propsData" :key="idx" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
                 @click="toggleComplete(todoItem, idx)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>

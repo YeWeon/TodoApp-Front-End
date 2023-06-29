@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul>
+        <TransitionGroup name="list" tag="ul">
             <li v-for="(todoItem, idx) in props.propsData" :key="idx" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
                 @click="toggleComplete(todoItem, idx)"></i>
@@ -8,9 +8,8 @@
                 <span class="removeBtn" @click="removeTodo(todoItem.item, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
-
             </li>
-        </ul>
+        </TransitionGroup>
 
     </div>
 </template>
@@ -38,8 +37,15 @@ const toggleComplete = (todoItem: TodoItem, index: number) => {
 </script>
 
 <style scoped>
-i,
-span {
+.list-enter-active, .list-leave-active {
+    transition: all 0.5s ease;
+}
+.list-enter-from, .list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+i,span {
     cursor: pointer;
 }
 

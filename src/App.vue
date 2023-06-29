@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList :props-data="todoItems"></TodoList>
+    <TodoInput @add:todo="addTodo"></TodoInput>
+    <TodoList :props-data="todoItems" 
+              @remove:todo="removeTodo">
+    </TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -36,8 +38,21 @@ export default defineComponent({
           } //if
         } //for
       } //if
-    });
-    return { todoItems };
+    }) //onBeforeMount
+
+    const addTodo = (todoItemStr: string) => {
+      const todoItemObj: TodoItem = { completed: false, item: todoItemStr }
+      localStorage.setItem(todoItemStr, JSON.stringify(todoItemObj))
+      todoItems.push(todoItemObj)
+    }
+
+    const removeTodo = (todoItemStr: string, index: number) => {
+      localStorage.removeItem(todoItemStr);
+      todoItems.splice(index, 1);
+    };
+
+
+    return { todoItems, addTodo, removeTodo };
   }, //setup
 
 });
@@ -56,8 +71,8 @@ export default defineComponent({
 body {
   text-align: center;
   background-color: #f6f6f6;
-  margin-left: 50px; 
-  margin-right: 50px; 
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 input {

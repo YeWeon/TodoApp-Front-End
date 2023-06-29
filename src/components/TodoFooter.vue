@@ -12,6 +12,7 @@ export default defineComponent({
         const clearTodo = () => {
             localStorage.clear()
         }
+
         return {clearTodo}
     }
 })

@@ -29,7 +29,7 @@ const removeTodo = (todoItem: TodoItem, index: number) => {
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {
-    emit('toggle:todo', todoItem, index)
+    store.commit("toggleTodo", {todoItem, index})
 }
 
 

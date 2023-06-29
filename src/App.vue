@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
     <TodoList></TodoList>
-    <TodoFooter @clear:todo="clearTodo"></TodoFooter>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 

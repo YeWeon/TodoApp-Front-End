@@ -1,71 +1,10 @@
 <template>
-  <div id="app">
-    <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
-    <TodoFooter></TodoFooter>
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
-
-<script lang="ts">
-import { defineComponent, onBeforeMount, reactive } from 'vue';
-import TodoHeader from '@/components/TodoHeader.vue';
-import TodoInput from '@/components/TodoInput.vue';
-import TodoList from '@/components/TodoList.vue';
-import TodoFooter from '@/components/TodoFooter.vue';
-import TodoItem from './types/TodoItem';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    TodoHeader,
-    TodoInput,
-    TodoList,
-    TodoFooter
-  },
-  setup() {
-    const todoItems = reactive<TodoItem[]>([]);
-
-    onBeforeMount(() => {
-      if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-          const storageKey = localStorage.key(i) as string;
-          const itemJson = localStorage.getItem(storageKey) as string | null;
-          if (itemJson) {
-            todoItems.push(JSON.parse(itemJson));
-          } //if
-        } //for
-      } //if
-    }) //onBeforeMount
-
-    const addTodo = (todoItemStr: string) => {
-      const todoItemObj: TodoItem = { completed: false, item: todoItemStr }
-      localStorage.setItem(todoItemStr, JSON.stringify(todoItemObj))
-      todoItems.push(todoItemObj)
-    }
-
-    const removeTodo = (todoItemStr: string, index: number) => {
-      localStorage.removeItem(todoItemStr);
-      todoItems.splice(index, 1);
-    };
-
-    const toggleTodo = (todoItem: TodoItem, index: number) => {
-      const { item, completed } = todoItem
-      todoItems[index].completed = !completed;
-      localStorage.removeItem(item);
-      localStorage.setItem(item, JSON.stringify(todoItems[index]));
-    };
-
-    const clearTodo = () => {
-      localStorage.clear()
-      todoItems.splice(0)
-    }
-
-    return { todoItems, addTodo, removeTodo, toggleTodo, clearTodo };
-  }, //setup
-
-});
-</script>
 
 <style>
 #app {
@@ -74,26 +13,18 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
-body {
-  text-align: center;
-  background-color: #f6f6f6;
-  margin-left: 50px;
-  margin-right: 50px;
+nav {
+  padding: 30px;
 }
 
-input {
-  border-style: groove;
-  width: 200px;
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-button {
-  border-style: groove;
-}
-
-.shadow {
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

@@ -1,41 +1,41 @@
 <template>
-    <div>
-        <span class="clearAllBtn" @click="clearTodo">Clear All</span>
-    </div>
+  <div>
+    <span class="clearAllBtn" @click="clearTodo">Clear All</span>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useStore } from "vuex"
+import { defineComponent } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
-    emits: ['clear:todo'],
-    setup() {
-        const store = useStore()
+  emits: ["clear:todo"],
+  setup() {
+    const store = useStore();
 
-        const clearTodo = () => {
-            store.commit("clearTodo")
-        }
-        return {clearTodo}
-    }
-})
+    const clearTodo = () => {
+      store.dispatch("clearTodo");
+    };
+    return { clearTodo };
+  },
+});
 </script>
 
 <style scoped>
 span {
-    cursor: pointer;
+  cursor: pointer;
 }
 .clearAllContainer {
-    width: 8.5rem;
-    height: 50px;
-    line-height: 50px;
-    background-color: white;
-    border-radius: 5px;
-    margin: 0 auto;
+  width: 8.5rem;
+  height: 50px;
+  line-height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
 .clearAllBtn {
-    color: #e20303;
-    display: block;
+  color: #e20303;
+  display: block;
 }
 </style>

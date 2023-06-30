@@ -1,9 +1,11 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/posts">Posts</router-link> |
+    <router-link to="/posts/new">New Post</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -16,7 +18,7 @@
 }
 
 nav {
-  padding: 30px;
+  padding: 20px;
 }
 
 nav a {
@@ -26,5 +28,25 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+body {
+  text-align: center;
+  background-color: #f6f6f6;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+input {
+  border-style: groove;
+  width: 200px;
+}
+
+button {
+  border-style: groove;
+}
+
+.shadow {
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }
 </style>

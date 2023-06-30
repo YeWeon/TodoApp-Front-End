@@ -17,7 +17,6 @@
     </TransitionGroup>
   </div>
 </template>
-
 <script setup lang="ts">
 import TodoItem from "@/types/TodoItem";
 import { computed, onMounted } from "vue";
